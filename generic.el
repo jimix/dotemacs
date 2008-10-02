@@ -53,6 +53,12 @@
 (define-key shell-mode-map [(meta n)] 'comint-next-matching-input-from-input)
 
 
+(require 'gud)
+(define-key gud-mode-map [(meta p)]
+  'comint-previous-matching-input-from-input)
+(define-key gud-mode-map [(meta n)] 'comint-next-matching-input-from-input)
+
+
 (require 'vc)
 (define-key vc-prefix-map "+" 'vc-version-diff)
 
