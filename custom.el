@@ -18,17 +18,20 @@
  '(indicate-buffer-boundaries nil)
  '(menu-bar-mode t)
  '(mouse-autoselect-window t)
+ '(mouse-wheel-progressive-speed nil)
  '(show-paren-mode t)
  '(ssh-directory-tracking-mode t)
  '(tool-bar-mode nil)
  '(tramp-debug-buffer t)
  '(tramp-terminal-type "tramp")
  '(truncate-partial-width-windows nil)
- '(uniquify-buffer-name-style (quote post-forward-angle-brackets) nil (uniquify)))
+ '(uniquify-buffer-name-style (quote post-forward-angle-brackets) nil (uniquify))
+ '(warning-suppress-types (quote ((undo discard-info)))))
 (custom-set-faces
   ;; custom-set-faces was added by Custom.
   ;; If you edit it by hand, you could mess it up, so be careful.
   ;; Your init file should contain only one such instance.
   ;; If there is more than one, they won't work right.
  '(default ((t (:stipple nil :background "black" :foreground "yellow" :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight normal :height 18 :width condensed :family "schumacher-clean"))))
- '(cursor ((t (:background "red")))))
+ '(cursor ((t (:background "red"))))
+ '(region ((((class color) (min-colors 88) (background dark)) (:background "grey40")))))
