@@ -53,6 +53,12 @@
 (define-key shell-mode-map [(meta n)] 'comint-next-matching-input-from-input)
 
 
+(require 'gud)
+(define-key gud-mode-map [(meta p)]
+  'comint-previous-matching-input-from-input)
+(define-key gud-mode-map [(meta n)] 'comint-next-matching-input-from-input)
+
+
 (require 'vc)
 (define-key vc-prefix-map "+" 'vc-version-diff)
 
@@ -83,10 +89,10 @@
 (progn (load "~/.emacs.d/cscope/cscope-project"))
 
 ;;;; These are new since I like to cscope these files as well
-(add-hook 'makefile-mode-hook  (function cscope-bind-keys))
-(add-hook 'sh-mode-hook (function cscope-bind-keys))
-(add-hook 'asm-mode-hook (function cscope-bind-keys))
-(add-hook 'compile-mode-hook (function cscope-bind-keys))
+(add-hook 'makefile-mode-hook  (function cscope-project:cscope-bind-keys))
+(add-hook 'sh-mode-hook (function cscope-project:cscope-bind-keys))
+(add-hook 'asm-mode-hook (function cscope-project:cscope-bind-keys))
+(add-hook 'compile-mode-hook (function cscope-project:cscope-bind-keys))
 
 (setq auto-mode-alist
       (append auto-mode-alist

@@ -7,4 +7,6 @@
  ("a2linux" ("cscope" "-l" "-d") "~/work/a2/linux-a2" "~/work/a2/linux-a2")
  ("mambo" ("cscope" "-l" "-d") "~/work/mambo/src" "~/work/mambo/src")
  ("ssl" ("cscope" "-l" "-d") "~/work/openssl/openssl" "~/work/openssl/openssl")
- ("bma" ("cscope" "-l" "-d") "~/work/bma/bma" "~/work/bma/bma"))
+ ("bma" ("cscope" "-l" "-d") "~/work/bma/bma" "~/work/bma/bma")
+ ("bs" ("cscope" "-l" "-d") "~/work/bs/linux" "~/work/bs/linux")
+)
