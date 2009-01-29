@@ -30,16 +30,21 @@
   "Kill literally all buffers.
 This keeps Emacs from bloating."
   (interactive)
-  (if (fboundp 'gnus-group-exit) (gnus-group-exit))
-  (loop for x being buffers
-    do (kill-buffer x)))
+  (setq list (buffer-list))
+  (while list
+    (let* ((buffer (car list)))
+      (kill-buffer buffer))
+    (setq list (cdr list))))
 
 (defun kill-all-file-buffers ()
   "Kill literally all buffers associated with a file.
 This keeps Emacs from bloating."
   (interactive)
-  (loop for x being buffers do
-    (if (buffer-file-name x) (kill-buffer x))))
+  (setq list (buffer-list))
+  (while list
+    (let* ((buffer (car list)))
+      (if (buffer-file-name buffer) (kill-buffer buffer)))
+    (setq list (cdr list))))
 
 (defun exchange-point-and-mark-without-zmacs ()
   "Exchange point and mark without activiating zmacs region.
