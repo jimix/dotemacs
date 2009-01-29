@@ -69,8 +69,12 @@
 (require 'font-lock)
 (require 'time)
 (require 'uniquify)
-;(require 'filladapt)
-;(add-hook 'text-mode-hook 'filladapt-mode)
+
+;;; filladapt.. I MISS you
+(progn (load "~/.emacs.d/filladapt"))
+(add-hook 'text-mode-hook 'filladapt-mode)
+(add-hook 'log-edit-mode-hook 'filladapt-mode)
+(setq default-major-mode 'filladapt-mode)
 
 
 ;; keep this separate cause I like to play with it
