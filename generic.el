@@ -116,3 +116,8 @@
 
 ;;; pending delete.. I LOVE you
 (delete-selection-mode t)
+
+;;; Teach the default minibuffer map how to do shell completions
+(define-key minibuffer-local-map "\t" 'comint-dynamic-complete)
+(define-key minibuffer-local-map "\M-\t" 'comint-dynamic-complete)
+(define-key minibuffer-local-map "\M-?" 'comint-dynamic-list-completions)
