@@ -30,6 +30,7 @@
  '(truncate-partial-width-windows nil)
  '(uniquify-buffer-name-style (quote post-forward-angle-brackets) nil (uniquify))
  '(vc-diff-switches "-u")
+ '(visible-bell t)
  '(warning-suppress-types (quote ((undo discard-info)))))
 (custom-set-faces
   ;; custom-set-faces was added by Custom.
