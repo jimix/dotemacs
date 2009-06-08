@@ -111,11 +111,30 @@
     ;; default
     (""						. "linux")))
 
-(add-hook 'c-mode-hook 'my-c-mode-hooks)
-(add-hook 'c++-mode-hook 'my-c-mode-hooks)
+(add-hook 'c-mode-common-hook 'cstyle-c-mode-hooks)
+;;; color oopsie comments
+(add-hook 'c-mode-common-hook
+	  (lambda ()
+	    (font-lock-add-keywords nil
+				    '(("\\<\\(FIXME\\|TODO\\|BUG\\):" 1 font-lock-warning-face t)))))
+
+;;; imenu, not as good as fume but WTF
+(defun try-to-add-imenu ()
+  (condition-case nil (imenu-add-menubar-index) (error nil)))
+(add-hook 'font-lock-mode-hook 'try-to-add-imenu)
+
 
 ;;; pending delete.. I LOVE you
 (delete-selection-mode t)
+
+;;; Turn on which-function mode
+(which-function-mode)
+
+;;; Turn on ido mode (obsoletes iswitchb)... nah.. to much shit
+;(ido-mode t)
+
+;;; windmove SHIFT and arrow keys
+(windmove-default-keybindings)
 
 ;;; Teach the default minibuffer map how to do shell completions
 (define-key minibuffer-local-map "\t" 'comint-dynamic-complete)
