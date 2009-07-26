@@ -6,6 +6,7 @@
   ;; If there is more than one, they won't work right.
  '(asm-comment-char 35)
  '(blink-cursor-mode nil)
+ '(comint-password-prompt-regexp "\\(\\(GSA \\|Enter \\|[Oo]ld \\|[Nn]ew \\|'s \\|login \\|Kerberos \\|CVS \\|UNIX \\| SMB \\|LDAP \\|\\[sudo] \\|^\\)[Pp]assword\\( (again)\\)?\\|pass phrase\\|\\(Enter \\|Repeat \\|Bad \\)?[Pp]assphrase\\)\\(?:, try again\\)?\\(?: for [^:]+\\)?:\\s *\\'")
  '(compilation-ask-about-save nil)
  '(compilation-scroll-output t)
  '(compilation-skip-threshold 0)
