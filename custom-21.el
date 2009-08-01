@@ -1,13 +1,11 @@
 
 (custom-set-variables
-  ;; custom-set-variables was added by Custom.
-  ;; If you edit it by hand, you could mess it up, so be careful.
+  ;; custom-set-variables was added by Custom -- don't edit or cut/paste it!
   ;; Your init file should contain only one such instance.
-  ;; If there is more than one, they won't work right.
  '(asm-comment-char 35)
- '(blink-cursor-mode nil)
+ '(blink-cursor-mode nil t)
  '(comint-password-prompt-regexp "\\(\\(GSA \\|Enter \\|[Oo]ld \\|[Nn]ew \\|'s \\|login \\|Kerberos \\|CVS \\|UNIX \\| SMB \\|LDAP \\|\\[sudo] \\|^\\)[Pp]assword\\( (again)\\)?\\|pass phrase\\|\\(Enter \\|Repeat \\|Bad \\)?[Pp]assphrase\\)\\(?:, try again\\)?\\(?: for [^:]+\\)?:\\s *\\'")
- '(compilation-ask-about-save nil)
+ '(compilation-ask-about-save nil t)
  '(compilation-scroll-output t)
  '(compilation-skip-threshold 0)
  '(compilation-skip-visited t)
@@ -25,10 +23,10 @@
  '(mouse-autoselect-window t)
  '(mouse-wheel-progressive-speed nil)
  '(save-place t nil (saveplace))
- '(show-paren-mode t)
+ '(show-paren-mode t t)
  '(show-trailing-whitespace t)
  '(ssh-directory-tracking-mode t)
- '(tool-bar-mode nil)
+ '(tool-bar-mode nil nil (tool-bar))
  '(tramp-debug-buffer t)
  '(tramp-terminal-type "tramp")
  '(truncate-partial-width-windows nil)
@@ -38,10 +36,7 @@
  '(warning-suppress-types (quote ((undo discard-info))))
  '(windmove-wrap-around t))
 (custom-set-faces
-  ;; custom-set-faces was added by Custom.
-  ;; If you edit it by hand, you could mess it up, so be careful.
+  ;; custom-set-faces was added by Custom -- don't edit or cut/paste it!
   ;; Your init file should contain only one such instance.
-  ;; If there is more than one, they won't work right.
- '(default ((t (:stipple nil :background "black" :foreground "yellow" :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight normal :height 18 :width condensed :family "schumacher-clean"))))
- '(cursor ((t (:background "red"))))
-)
+ '(default ((t (:stipple nil :background "black" :foreground "yellow" :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight normal :height 87 :width normal :family "schumacher-clean"))))
+ '(cursor ((t (:background "red")))))
