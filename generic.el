@@ -93,10 +93,10 @@
 (progn (load "~/.emacs.d/cscope/cscope-project"))
 
 ;;;; These are new since I like to cscope these files as well
-(add-hook 'makefile-mode-hook  (function cscope-project:cscope-bind-keys))
-(add-hook 'sh-mode-hook (function cscope-project:cscope-bind-keys))
-(add-hook 'asm-mode-hook (function cscope-project:cscope-bind-keys))
-(add-hook 'compile-mode-hook (function cscope-project:cscope-bind-keys))
+(add-hook 'makefile-mode-hook  (function cscope-project:c-mode-hook))
+(add-hook 'sh-mode-hook (function cscope-project:c-mode-hook))
+(add-hook 'asm-mode-hook (function cscope-project:c-mode-hook))
+(add-hook 'compile-mode-hook (function cscope-project:c-mode-hook))
 
 (setq auto-mode-alist
       (append auto-mode-alist
