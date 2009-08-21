@@ -1,4 +1,9 @@
-(setq custom-file "~/.emacs.d/custom.el")
+
+;;;# separate custom file for different versions
+(setq custom-file 
+      (cond ((string-match "^21\." emacs-version) "~/.emacs.d/custom-21.el")
+	    ;;; fallthru case is currently for version 22
+	    (t "~/.emacs.d/custom.el")))
 (load custom-file)
 
 (progn (load "~/.emacs.d/generic"))
