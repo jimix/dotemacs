@@ -108,6 +108,7 @@
 (setq auto-c-mode-alist
   '(("/kitchsrc/"				. "cc-mode")
     ("/work/mambo/"				. "cc-mode")
+    ("/work/xml/"				. "cc-mode")
     ;; default
     (""						. "linux")))
 

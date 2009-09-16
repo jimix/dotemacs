@@ -4,7 +4,7 @@
   "~/work/stubbers/stubbers" "~/work/stubbers/stubbers")
  ("linux" ("cscope" "-l" "-d")
   "~/work/linux/linux-2.6" "~/work/linux/linux-2.6")
- ("a2linux" ("cscope" "-l" "-d") "~/work/a2/linux-a2" "~/work/a2/linux-a2")
+ ("a2linux" ("cscope" "-l" "-d") "~/work/prism/linux-a2" "~/work/prism/linux-a2")
  ("mambo" ("cscope" "-l" "-d") "~/work/mambo/src" "~/work/mambo/src")
  ("ssl" ("cscope" "-l" "-d") "~/work/openssl/openssl" "~/work/openssl/openssl")
  ("bma" ("cscope" "-l" "-d") "~/work/bma/bma" "~/work/bma/bma")

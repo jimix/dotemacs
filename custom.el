@@ -46,6 +46,6 @@
   ;; Your init file should contain only one such instance.
   ;; If there is more than one, they won't work right.
  '(default ((t (:stipple nil :background "black" :foreground "yellow" :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight normal :height 18 :width condensed :family "schumacher-clean"))))
- '(cursor ((t (:background "red"))))
+ '(cursor ((t (:background "OrangeRed"))))
  '(region ((((class color) (min-colors 88) (background dark)) (:background "grey40"))))
  '(which-func ((((class color) (min-colors 88) (background dark)) (:background "black" :foreground "yellow")))))
