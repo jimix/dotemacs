@@ -69,7 +69,7 @@ To activate use `activate-region' \\[activate-region] instead."
   (concat "*" (downcase major-mode-name) "*" default-directory)
 )
 
-(defun my-c-mode-hooks ()
+(defun cstyle-c-mode-hooks ()
   "Look at auto-c-mode-alist to decide on the c style mode"
   (save-excursion
     (let ((name  (file-name-sans-versions buffer-file-name))
