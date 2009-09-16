@@ -22,6 +22,7 @@
  '(menu-bar-mode t)
  '(mouse-autoselect-window t)
  '(mouse-wheel-progressive-speed nil)
+ '(safe-local-variable-values (quote ((backup-inhibited . t))))
  '(show-paren-mode t)
  '(ssh-directory-tracking-mode t)
  '(tool-bar-mode nil)
