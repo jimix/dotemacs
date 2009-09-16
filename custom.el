@@ -28,6 +28,7 @@
  '(save-place t nil (saveplace))
  '(savehist-file "~/.emacs.history")
  '(savehist-mode t nil (savehist))
+ '(safe-local-variable-values (quote ((backup-inhibited . t))))
  '(show-paren-mode t)
  '(show-trailing-whitespace t)
  '(ssh-directory-tracking-mode t)
