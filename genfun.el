@@ -88,6 +88,10 @@ To activate use `activate-region' \\[activate-region] instead."
 	(setq alist (cdr alist)))
       (c-set-style mode))))
 
+
+(defconst mambo-c-style '("cc-mode" (indent-tabs-mode . nil)))
+(c-add-style "mambo" mambo-c-style)
+
 (defun force-write ()
   "force file and buffer to be writable"
   (interactive)
