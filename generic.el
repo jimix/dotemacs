@@ -6,13 +6,13 @@
 (progn (load "~/.emacs.d/genfun"))
 
 ;; C-x
-(define-key global-map [(control x) w] 'what-line)
+(define-key global-map (kbd "C-x w") 'what-line)
+(define-key global-map (kbd "C-x f") 'find-file-at-point)
+(define-key global-map (kbd "C-x x") 'match-paren)
+(define-key global-map (kbd "C-x t") 'touch-buffer)
+(define-key global-map (kbd "C-x Q") 'force-write)
 (define-key global-map [(control x) down] 'bury-buffer)
-(define-key global-map [(control x) f] 'find-file-at-point)
 (define-key global-map [(control x) return] nil)
-(define-key global-map [(control x) %] 'match-paren)
-(define-key global-map [(control x) t] 'touch-buffer)
-(define-key global-map [(control x) Q] 'force-write)
 (define-key global-map [(control x) (control x)]
   'exchange-point-and-mark-without-zmacs)
 (define-key global-map [(control x) (control c)]
@@ -37,6 +37,7 @@
 (define-key global-map [f9] 'previous-error)
 (define-key global-map [f10] 'next-error)
 (define-key global-map [f12] 'make-buffer-neat)
+(define-key global-map [(control f12)] 'rename-uniquely)
 (define-key global-map [(shift f12)] 'rename-buffer)
 
 ;; Other keys
@@ -107,8 +108,9 @@
 (setq c-style-variables-are-local-p t)
 (setq auto-c-mode-alist
   '(("/kitchsrc/"				. "cc-mode")
-    ("/work/mambo/"				. "cc-mode")
+    ("/work/mambo/"				. "mambo")
     ("/work/xml/"				. "cc-mode")
+    ("/work/juniper/"				. "cc-mode")
     ;; default
     (""						. "linux")))
 
@@ -118,6 +120,13 @@
 	  (lambda ()
 	    (font-lock-add-keywords nil
 				    '(("\\<\\(FIXME\\|TODO\\|BUG\\):" 1 font-lock-warning-face t)))))
+
+;;; mambo tcl crap
+(defun mambo-tcl-hook ()
+  (if (and (buffer-file-name)
+	   (string-match "/work/mambo/" (buffer-file-name)))
+	   (setq indent-tabs-mode nil)))
+(add-hook 'tcl-mode-hook 'mambo-tcl-hook)
 
 ;;; imenu, not as good as fume but WTF
 (defun try-to-add-imenu ()
@@ -141,3 +150,23 @@
 (define-key minibuffer-local-map "\t" 'comint-dynamic-complete)
 (define-key minibuffer-local-map "\M-\t" 'comint-dynamic-complete)
 (define-key minibuffer-local-map "\M-?" 'comint-dynamic-list-completions)
+
+;;; fix gcc include regex for newer compilers on version 23.1
+;;; I don't know if this works before 23.x
+(require 'compile)
+;; Latest pattern from repo
+(defconst my-gcc-include '(my-gcc-include
+     "^\\(?:In file included \\|                 \\|\t\\)from \
+\\([0-9]*[^0-9\n]\\(?:[^\n :]\\| [^-/\n]\\| :[^ :\n]\\)*?\\):\
+\\([0-9]+\\)\\(?::\\([0-9]+\\)\\)?\\(?:\\(:\\)\\|\\(,\\|$\\)\\)?"
+     1 2 3 (4 . 5)))
+(if (string-match "^23\.1\." emacs-version)
+    (progn
+     ;; remove original
+     (setq compilation-error-regexp-alist-alist
+	   (assq-delete-all 'gcc-include compilation-error-regexp-alist-alist))
+     ;; add mine
+     (add-to-list 'compilation-error-regexp-alist-alist my-gcc-include)
+     ;; rebuild alist
+     (setq compilation-error-regexp-alist
+	   (mapcar 'car compilation-error-regexp-alist-alist))))
