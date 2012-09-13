@@ -170,3 +170,8 @@
      ;; rebuild alist
      (setq compilation-error-regexp-alist
 	   (mapcar 'car compilation-error-regexp-alist-alist))))
+
+;;; move this to a hook
+;;(define-key c-mode-map [(control c) (control /)] 'recomment-line)
+
+

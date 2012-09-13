@@ -131,3 +131,16 @@ With arg N, push mark N/10 of the way from the true end."
                  (point-max))
              nil
              t))
+
+(defun recomment (beg end &optional arg)
+  "Re comment a region it undoes one comment type and redoes it in the prefered manner"
+  (interactive "*r\nP")
+  (comment-normalize-vars)
+  (comment-or-uncomment-region beg end arg)
+  (comment-or-uncomment-region beg end arg))
+
+(defun recomment-line ()
+  "Re comment a line it undoes one comment type and redoes it in the prefered manner"
+  (interactive)
+  (comment-or-uncomment-region (line-beginning-position) (line-end-position))
+  (comment-or-uncomment-region (line-beginning-position) (line-end-position)))
