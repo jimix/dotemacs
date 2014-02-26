@@ -86,11 +86,51 @@ To activate use `activate-region' \\[activate-region] instead."
 	      (setq mode (cdr (car alist))
 		    keep-going nil)))
 	(setq alist (cdr alist)))
-      (c-set-style mode))))
+      (c-set-style mode)
+      (c-set-offset 'arglist-intro '++))))
 
 
 (defconst mambo-c-style '("cc-mode" (indent-tabs-mode . nil)))
 (c-add-style "mambo" mambo-c-style)
+
+(defconst mare-c-style '("gnu"
+               (indent-tabs-mode                   . nil)
+               (c-basic-offset                     . 2)
+               (comment-column                     . 40)
+               (c-backslash-column                 . 76)
+
+               (c-indent-comments-syntactically-p  . t)
+               (c-hanging-comment-starter-p        . nil)
+               (c-hanging-comment-ender-p          . nil)
+               (c-comment-only-line-offset         . 0)
+
+               (c-hanging-braces-alist . ((class-open after)
+                                          (class-close before)
+                                          (brace-list-open after)
+                                          (brace-list-close before)
+                                          (substatement-open after)
+                                          (inline-open after)
+                                          (extern-lang-open after)
+                                          (namespace-open after)
+                                          (block-close . c-snug-do-while)))
+
+               (c-offsets-alist . ((innamespace . 0)
+                                   (inextern-lang . 0)
+                                   (substatement-open . 0)))
+
+               (c-hanging-semi&comma-criteria . (c-semi&comma-no-newlines-before-nonblanks
+                                                 c-semi&comma-inside-parenlist
+                                                 c-semi&comma-no-newlines-for-oneline-inliners))
+
+               (c-cleanup-list . (brace-else-brace
+                                  brace-elseif-brace
+                                  empty-defun-braces
+                                  defun-close-semi
+                                  compact-empty-funcall))
+               (arglist-intro                      . ++)
+	       ))
+(c-add-style "mare" mare-c-style)
+
 
 (defun force-write ()
   "force file and buffer to be writable"
@@ -100,7 +140,7 @@ To activate use `activate-region' \\[activate-region] instead."
 
 ;
 ; Stuff xemacs has but I want
-; frome simple.el
+; from simple.el
 ;
 
 (defun mark-beginning-of-buffer (&optional arg)

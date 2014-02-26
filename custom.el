@@ -1,12 +1,13 @@
 
 (custom-set-variables
-  ;; custom-set-variables was added by Custom.
-  ;; If you edit it by hand, you could mess it up, so be careful.
-  ;; Your init file should contain only one such instance.
-  ;; If there is more than one, they won't work right.
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
  '(asm-comment-char 35)
  '(blink-cursor-mode nil)
- '(comint-password-prompt-regexp "\\(\\(GSA \\|Enter \\|[Oo]ld \\|[Nn]ew \\|'s \\|login \\|Kerberos \\|CVS \\|UNIX \\| SMB \\|LDAP \\|\\[sudo] \\|^\\)[Pp]assword\\( (again)\\)?\\|pass phrase\\|\\(Enter \\|Repeat \\|Bad \\)?[Pp]assphrase\\)\\(?:, try again\\)?\\(?: for [^:]+\\)?:\\s *\\'")
+ '(comint-password-prompt-regexp
+   "\\(\\(GSA \\|Enter \\|[Oo]ld \\|[Nn]ew \\|'s \\|login \\|Kerberos \\|CVS \\|UNIX \\| SMB \\|LDAP \\|\\[sudo] \\|^\\)[Pp]assword\\( (again)\\)?\\|pass phrase\\|\\(Enter \\|Repeat \\|Bad \\)?[Pp]assphrase\\)\\(?:, try again\\)?\\(?: for [^:]+\\)?:\\s *\\'")
  '(compilation-ask-about-save nil)
  '(compilation-context-lines 3)
  '(compilation-error-screen-columns t)
@@ -17,22 +18,38 @@
  '(cscope-projects-file "~/.emacs.d/cscope-projects.el")
  '(cvs-auto-remove-handled t)
  '(cvs-find-file-and-jump nil)
+ '(ffap-newfile-prompt t)
  '(focus-follows-mouse t)
  '(fringe-mode (quote (1 . 1)) nil (fringe))
- '(grep-find-command "find . \\( -name CVS -o -name SCCS -o -name .hg -o -name .git \\) -prune -o \\! \\( -name \\*~ -o -name .\\#\\* -o -name cscope.\\* \\) -type f -print0 | xargs -0 grep -n -e")
+ '(gdb-show-threads-by-default t)
+ '(gdb-stack-buffer-addresses t)
+ '(gdb-thread-buffer-addresses t)
+ '(global-auto-revert-mode t)
+ '(global-semantic-decoration-mode t)
+ '(global-semantic-highlight-func-mode t)
+ '(global-semantic-idle-breadcrumbs-mode t nil (semantic/idle))
+ '(global-semantic-idle-completions-mode t nil (semantic/idle))
+ '(global-semantic-idle-local-symbol-highlight-mode t nil (semantic/idle))
+ '(global-semantic-idle-summary-mode t)
+ '(global-semantic-stickyfunc-mode t)
+ '(grep-find-command
+   "find . \\( -name CVS -o -name SCCS -o -name .hg -o -name .git \\) -prune -o \\! \\( -name \\*~ -o -name .\\#\\* -o -name cscope.\\* \\) -type f -print0 | xargs -0 grep -n -e")
  '(ido-default-file-method (quote selected-window))
  '(ido-everywhere t)
  '(indicate-buffer-boundaries nil)
  '(log-edit-confirm t)
  '(menu-bar-mode t)
  '(mouse-autoselect-window t)
+ '(mouse-drag-copy-region t)
  '(mouse-wheel-progressive-speed nil)
+ '(revert-without-query nil)
  '(safe-local-variable-values (quote ((backup-inhibited . t))))
  '(save-place t nil (saveplace))
  '(savehist-file "~/.emacs.history")
  '(savehist-mode t nil (savehist))
  '(show-paren-mode t)
  '(show-trailing-whitespace t)
+ '(split-width-threshold nil)
  '(ssh-directory-tracking-mode t)
  '(tool-bar-mode nil)
  '(tramp-debug-buffer t)
@@ -42,13 +59,18 @@
  '(vc-diff-switches "-u")
  '(visible-bell t)
  '(warning-suppress-types (quote ((undo discard-info))))
- '(windmove-wrap-around t))
+ '(windmove-wrap-around t)
+ '(x-select-enable-clipboard t)
+ '(x-select-enable-primary t))
 (custom-set-faces
-  ;; custom-set-faces was added by Custom.
-  ;; If you edit it by hand, you could mess it up, so be careful.
-  ;; Your init file should contain only one such instance.
-  ;; If there is more than one, they won't work right.
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
  '(default ((t (:stipple nil :background "black" :foreground "yellow" :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight normal :height 18 :width condensed :family "schumacher-clean"))))
  '(cursor ((t (:background "OrangeRed"))))
+ '(ebrowse-member-class ((t (:background "gold" :foreground "purple"))))
+ '(ebrowse-root-class ((t (:background "gold" :foreground "blue1" :weight bold))))
  '(region ((((class color) (min-colors 88) (background dark)) (:background "grey40"))))
+ '(trailing-whitespace ((t (:background "magenta"))))
  '(which-func ((((class color) (min-colors 88) (background dark)) (:background "black" :foreground "yellow")))))

@@ -36,6 +36,7 @@
 ;;(define-key global-map [(shift f8)] "\C-xk\C-m\C-x0")
 (define-key global-map [f9] 'previous-error)
 (define-key global-map [f10] 'next-error)
+(define-key global-map [f11] 'gdb-many-windows)
 (define-key global-map [f12] 'make-buffer-neat)
 (define-key global-map [(control f12)] 'rename-uniquely)
 (define-key global-map [(shift f12)] 'rename-buffer)
@@ -70,6 +71,9 @@
 (require 'font-lock)
 (require 'time)
 (require 'uniquify)
+
+;;; X11/Xdefaults used to do this for me, this does it always
+(setq scroll-bar-width 5)
 
 ;;; filladapt.. I MISS you
 (progn (load "~/.emacs.d/filladapt"))
@@ -107,10 +111,9 @@
 
 (setq c-style-variables-are-local-p t)
 (setq auto-c-mode-alist
-  '(("/kitchsrc/"				. "cc-mode")
-    ("/work/mambo/"				. "mambo")
-    ("/work/xml/"				. "cc-mode")
-    ("/work/juniper/"				. "cc-mode")
+  '(("/work/xml/"				. "cc-mode")
+    ("/work/manticore/"				. "mare")
+    ("/work/mare/"				. "mare")
     ;; default
     (""						. "linux")))
 
@@ -174,4 +177,24 @@
 ;;; move this to a hook
 ;;(define-key c-mode-map [(control c) (control /)] 'recomment-line)
 
+;;; cedet
+;; (if (string-match "^24\.[3-9]\." emacs-version)
+;;     (progn
+;;       (global-ede-mode 1)
+;;       (require 'semantic/sb)
+;;       (require 'srecode)
+;;       (semantic-mode 1)))
+
+
+;;; add markdown mode for github files
+(add-to-list 'auto-mode-alist '("\\.md$" . markdown-mode))
+
+;; Force gdb-mi to not dedicate any windows
+(defadvice gdb-display-buffer (after undedicate-gdb-display-buffer)
+  (set-window-dedicated-p ad-return-value nil))
+(ad-activate 'gdb-display-buffer)
+
+(defadvice gdb-set-window-buffer (after undedicate-gdb-set-window-buffer (name &optional ignore-dedi window))
+  (set-window-dedicated-p window nil))
+(ad-activate 'gdb-set-window-buffer)
 
