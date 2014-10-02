@@ -93,6 +93,9 @@ To activate use `activate-region' \\[activate-region] instead."
 (defconst mambo-c-style '("cc-mode" (indent-tabs-mode . nil)))
 (c-add-style "mambo" mambo-c-style)
 
+(defconst ev3-c-style '("gnu" (indent-tabs-mode . nil)))
+(c-add-style "ev3" ev3-c-style)
+
 (defconst mare-c-style '("gnu"
                (indent-tabs-mode                   . nil)
                (c-basic-offset                     . 2)

@@ -114,6 +114,8 @@
   '(("/work/xml/"				. "cc-mode")
     ("/work/manticore/"				. "mare")
     ("/work/mare/"				. "mare")
+    ("/work/mambo/"				. "mambo")
+    ("/work/ev3/"				. "ev3")
     ;; default
     (""						. "linux")))
 
