@@ -1,5 +1,12 @@
 
 ;;;# separate custom file for different versions
+
+;; Added by Package.el.  This must come before configurations of
+;; installed packages.  Don't delete this line.  If you don't want it,
+;; just comment it out by adding a semicolon to the start of the line.
+;; You may delete these explanatory comments.
+(package-initialize)
+
 (setq custom-file 
       (cond ((string-match "^21\." emacs-version) "~/.emacs.d/custom-21.el")
 	    ;;; fallthru case is currently for version 22

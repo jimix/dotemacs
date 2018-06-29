@@ -5,6 +5,11 @@
 (server-start)
 (progn (load "~/.emacs.d/genfun"))
 
+;; Force Git (or anything looking to page output) to cat
+(setenv "PAGER" "cat")
+(setenv "EDITOR" "/Applications/Emacs.app/Contents/MacOS/bin/emacsclient")
+(setenv "PS1" "\\h.\\!$ ")
+
 ;; C-x
 (define-key global-map (kbd "C-x w") 'what-line)
 (define-key global-map (kbd "C-x f") 'find-file-at-point)
@@ -43,6 +48,7 @@
 
 ;; Other keys
 (define-key global-map [(meta g)] 'goto-line)
+(define-key global-map [(meta control g)] 'vc-git-grep)
 (define-key global-map [(control z)] nil)
 (define-key global-map [(shift tab)] 'tab-to-tab-stop)
 (define-key global-map [(control t)] 'toggle-truncate-lines)
@@ -59,7 +65,7 @@
 (define-key gud-mode-map [(meta p)]
   'comint-previous-matching-input-from-input)
 (define-key gud-mode-map [(meta n)] 'comint-next-matching-input-from-input)
-
+(define-key global-map [(meta control g)] 'vc-git-grep)
 
 (require 'vc)
 (define-key vc-prefix-map "+" 'vc-version-diff)
@@ -117,7 +123,7 @@
     ("/work/mambo/"				. "mambo")
     ("/work/ev3/"				. "ev3")
     ;; default
-    (""						. "linux")))
+    (""						. "fastsim")))
 
 (add-hook 'c-mode-common-hook 'cstyle-c-mode-hooks)
 ;;; color oopsie comments
@@ -200,3 +206,9 @@
   (set-window-dedicated-p window nil))
 (ad-activate 'gdb-set-window-buffer)
 
+(progn (load "~/.emacs.d/google-c-style"))
+(c-add-style "fastsim"
+             '("Google"
+               (c-basic-offset . 4)
+               (c-hanging-braces-alist . ((defun-open before)))
+               ))
