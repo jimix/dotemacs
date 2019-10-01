@@ -690,7 +690,7 @@ the current window to be used for the visited file."
 		(find-file-other-window cscope:filename))
 	  (setq cscope:affiliated-buffer affiliated-buffer)
 	  (if (not cscope-id) (setq cscope-id cscope-id-affiliated))
-	  (goto-line (string-to-int linenumb))
+	  (goto-line (string-to-number linenumb))
 	  (message "CSCOPE: Function: %s" function)
 	  (run-hooks 'cscope-interpret-output-hook)
 	  ))
