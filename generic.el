@@ -10,6 +10,8 @@
 (setenv "EDITOR" "/Applications/Emacs.app/Contents/MacOS/bin/emacsclient")
 (setenv "PS1" "\\h.\\!$ ")
 
+(when (memq window-system '(mac ns x)) (exec-path-from-shell-initialize))
+
 ;; C-x
 (define-key global-map (kbd "C-x w") 'what-line)
 (define-key global-map (kbd "C-x f") 'find-file-at-point)
@@ -52,13 +54,23 @@
 (define-key global-map [(control z)] nil)
 (define-key global-map [(shift tab)] 'tab-to-tab-stop)
 (define-key global-map [(control t)] 'toggle-truncate-lines)
+(define-key global-map [(meta t)] nil)
+(define-key global-map [(control meta tab)] 'clang-format-region)
+(define-key global-map [(control meta y)] '(lambda ()
+                                             (interactive)
+                                             (popup-menu 'yank-menu)))
 
 (require 'shell)
 (define-key shell-mode-map [(meta return)] 'shell-resync-dirs)
-(define-key shell-mode-map [(control return)] 'comint-copy-old-input)
+;;(define-key shell-mode-map [(control return)] 'comint-copy-old-input)
+(define-key shell-mode-map [(control return)] 'my-comint-copy-line)
+(define-key shell-mode-map [(control c) (return)] 'my-comint-copy-line)
+
 (define-key shell-mode-map [(meta p)]
   'comint-previous-matching-input-from-input)
 (define-key shell-mode-map [(meta n)] 'comint-next-matching-input-from-input)
+;;(define-key shell-mode-map [(control a)] 'comint-bol-or-process-mark)
+;;(define-key shell-mode-map [(control x) (control h)] `comint-delete-output)
 
 
 (require 'gud)
@@ -139,6 +151,11 @@
 	   (setq indent-tabs-mode nil)))
 (add-hook 'tcl-mode-hook 'mambo-tcl-hook)
 
+;;; groovy
+(add-hook 'groovy-mode-hook
+          (lambda ()
+            (c-set-offset 'label 4)))
+
 ;;; imenu, not as good as fume but WTF
 (defun try-to-add-imenu ()
   (condition-case nil (imenu-add-menubar-index) (error nil)))
@@ -196,6 +213,10 @@
 
 ;;; add markdown mode for github files
 (add-to-list 'auto-mode-alist '("\\.md$" . markdown-mode))
+(add-to-list 'auto-mode-alist '("COMMIT_EDITMSG$" . indented-text-mode))
+
+(require 'cl)
+(add-to-list 'auto-mode-alist '("\\.gradle$" . groovy-mode))
 
 ;; Force gdb-mi to not dedicate any windows
 (defadvice gdb-display-buffer (after undedicate-gdb-display-buffer)
@@ -206,9 +227,50 @@
   (set-window-dedicated-p window nil))
 (ad-activate 'gdb-set-window-buffer)
 
+(add-hook 'groovy-mode-hook (lambda() (setq indent-tabs-mode nil)))
+
 (progn (load "~/.emacs.d/google-c-style"))
+(c-add-style "google" google-c-style)
 (c-add-style "fastsim"
-             '("Google"
+             '("google"
                (c-basic-offset . 4)
                (c-hanging-braces-alist . ((defun-open before)))
                ))
+
+;;; Activate Ivy
+(ivy-mode 1)
+;;(global-set-key "\C-s" 'swiper) ;;; I tried to love you.. honest
+(global-set-key (kbd "C-c C-r") 'ivy-resume)
+(global-set-key (kbd "M-x") 'counsel-M-x)
+(global-set-key (kbd "C-x C-f") 'counsel-find-file)
+(global-set-key (kbd "C-c g") 'counsel-git)
+(global-set-key (kbd "C-c j") 'counsel-git-grep)
+(global-set-key (kbd "C-c k") 'counsel-ag)
+(global-set-key (kbd "C-x l") 'counsel-locate)
+(global-set-key (kbd "C-S-o") 'counsel-rhythmbox)
+(define-key minibuffer-local-map (kbd "C-r") 'counsel-minibuffer-history)
+(global-set-key (kbd "C-x M-f") 'project-find-file)
+
+;;(modern-c++-font-lock-global-mode t)
+(add-hook 'c++-mode-hook #'modern-c++-font-lock-mode)
+
+(require 'ycmd)
+(add-hook 'after-init-hook #'global-ycmd-mode)
+
+
+(require 'company-ycmd)
+(company-ycmd-setup)
+
+(require 'flycheck-ycmd)
+(flycheck-ycmd-setup)
+
+;; Very Large File
+(require 'vlf-setup)
+
+;; JQ mode
+(autoload 'jq-mode "~/.emacs.d/jq-mode.el"
+    "Major mode for editing jq files" t)
+(add-to-list 'auto-mode-alist '("\\.jq$" . jq-mode))
+
+(provide 'generic)
+;;; generic.el ends here

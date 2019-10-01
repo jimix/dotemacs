@@ -187,3 +187,81 @@ With arg N, push mark N/10 of the way from the true end."
   (interactive)
   (comment-or-uncomment-region (line-beginning-position) (line-end-position))
   (comment-or-uncomment-region (line-beginning-position) (line-end-position)))
+
+(define-derived-mode arm-mode asm-mode "ARM"
+  "Major mode for editing ARM assembler code."
+  ;; Unset ; key.
+  (local-unset-key (vector asm-comment-char))
+  (set (make-local-variable 'asm-comment-char) ?@)
+  (local-set-key (vector asm-comment-char) 'asm-comment)
+  ;; Update syntax for new comment char.
+  (set-syntax-table (make-syntax-table asm-mode-syntax-table))
+  (modify-syntax-entry asm-comment-char "< b")
+  ;; Fix one level comments.
+  (set (make-local-variable 'comment-start) (string asm-comment-char))
+  (set (make-local-variable 'indent-tabs-mode) nil) ; use spaces to indent
+  (electric-indent-mode -1) ; indentation in asm-mode is annoying
+  (set (make-local-variable 'tab-stop-list) (number-sequence 4 60 4))
+)
+
+
+;;; handle line numbers
+;;; https://www.emacswiki.org/emacs/FindFileAtPoint
+(defvar ffap-file-at-point-line-number nil
+  "Variable to hold line number from the last `ffap-file-at-point' call.")
+
+(defadvice ffap-file-at-point (after ffap-store-line-number activate)
+  "Search `ffap-string-at-point' for a line number pattern and
+save it in `ffap-file-at-point-line-number' variable."
+  (let* ((string (ffap-string-at-point)) ;; string/name definition copied from `ffap-string-at-point'
+         (name
+          (or (condition-case nil
+                  (and (not (string-match "//" string)) ; foo.com://bar
+                       (substitute-in-file-name string))
+                (error nil))
+              string))
+         (line-number-string 
+          (and (string-match ":[0-9]+" name)
+               (substring name (1+ (match-beginning 0)) (match-end 0))))
+         (line-number
+          (and line-number-string
+               (string-to-number line-number-string))))
+    (if (and line-number (> line-number 0)) 
+        (setq ffap-file-at-point-line-number line-number)
+      (setq ffap-file-at-point-line-number nil))))
+
+(defadvice find-file-at-point (after ffap-goto-line-number activate)
+  "If `ffap-file-at-point-line-number' is non-nil goto this line."
+  (when ffap-file-at-point-line-number
+    (goto-line ffap-file-at-point-line-number)
+    (setq ffap-file-at-point-line-number nil)))
+
+;; https://www.emacswiki.org/emacs/CopyingWholeLines
+(defun copy-line (arg)
+    "Copy lines (as many as prefix argument) in the kill ring.
+      Ease of use features:
+      - (DISABLED) Move to start of next line.
+      - Appends the copy on sequential calls.
+      - (DISABLED) Use newline as last char even on the last line of the buffer.
+      - If region is active, copy its lines."
+    (interactive "p")
+    (let ((beg (line-beginning-position))
+          (end (line-end-position arg)))
+      (when mark-active
+        (if (> (point) (mark))
+            (setq beg (save-excursion (goto-char (mark)) (line-beginning-position)))
+          (setq end (save-excursion (goto-char (mark)) (line-end-position)))))
+      (if (eq last-command 'copy-line)
+          (kill-append (buffer-substring beg end) (< end beg))
+        (kill-ring-save beg end)))
+;;    (kill-append "\n" nil)
+;;    (beginning-of-line (or (and arg (1+ arg)) 2))
+    (if (and arg (not (= 1 arg))) (message "%d lines copied" arg)))
+
+(defun my-comint-copy-line ()
+  "Copy line to comint input"
+  (interactive)
+  (copy-line 1)
+  (comint-goto-process-mark)
+  (yank))
+
