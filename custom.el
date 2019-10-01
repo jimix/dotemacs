@@ -4,10 +4,11 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(asm-comment-char 35)
  '(blink-cursor-mode nil)
+ '(clang-format-executable "~/bin/clang-format")
+ '(comint-eol-on-send t)
  '(comint-password-prompt-regexp
-   "\\(\\(GSA \\|Enter \\|[Oo]ld \\|[Nn]ew \\|'s \\|login \\|Kerberos \\|CVS \\|UNIX \\| SMB \\|LDAP \\|\\[sudo] \\|^\\)[Pp]assword\\( (again)\\)?\\|pass phrase\\|\\(Enter \\|Repeat \\|Bad \\)?[Pp]assphrase\\)\\(?:, try again\\)?\\(?: for [^:]+\\)?:\\s *\\'")
+   "\\(\\(Verify password \\- \\|GSA \\|Enter \\|[Oo]ld \\|[Nn]ew \\|'s \\|login \\|Kerberos \\|CVS \\|UNIX \\| SMB \\|LDAP \\|\\[sudo] \\|^\\)[Pp]assword\\( (again)\\)?\\|pass phrase\\|\\(Enter \\|Repeat \\|Bad \\)?[Pp]assphrase\\)\\(?:, try again\\)?\\(?: for [^:]+\\)?:\\s *\\'")
  '(comint-use-prompt-regexp nil)
  '(compilation-ask-about-save nil)
  '(compilation-context-lines 3)
@@ -19,6 +20,8 @@
  '(cscope-projects-file "~/.emacs.d/cscope-projects.el")
  '(cvs-auto-remove-handled t)
  '(cvs-find-file-and-jump nil)
+ '(enable-recursive-minibuffers nil)
+ '(explicit-bash-args (quote ("-i")))
  '(ffap-newfile-prompt t)
  '(focus-follows-mouse t)
  '(fringe-mode (quote (1 . 1)) nil (fringe))
@@ -33,14 +36,24 @@
  '(global-semantic-idle-local-symbol-highlight-mode t nil (semantic/idle))
  '(global-semantic-idle-summary-mode t)
  '(global-semantic-stickyfunc-mode t)
+ '(global-ycmd-mode t)
+ '(grep-command "grep  -nH -e ")
  '(grep-find-command
    "find . \\( -name CVS -o -name SCCS -o -name .hg -o -name .git \\) -prune -o \\! \\( -name \\*~ -o -name .\\#\\* -o -name cscope.\\* \\) -type f -print0 | xargs -0 grep -n -e")
+ '(grep-find-template
+   "find <D> <X> -type f <F> -exec grep <C> -nH -e <R> \\{\\} +")
+ '(grep-template "grep <X> <C> -nH  -e <R> <F>")
+ '(grep-use-null-filename-separator nil)
  '(ido-default-file-method (quote selected-window))
  '(ido-everywhere t)
  '(indent-tabs-mode nil)
  '(indicate-buffer-boundaries nil)
  '(ispell-local-dictionary-alist nil)
+ '(ivy-mode t)
+ '(ivy-use-virtual-buffers t)
+ '(large-file-warning-threshold 1000000)
  '(log-edit-confirm t)
+ '(mac-option-modifier (quote (:ordinary meta :function alt :mouse alt)))
  '(markdown-command "multimarkdown")
  '(menu-bar-mode t)
  '(mouse-autoselect-window t)
@@ -50,8 +63,12 @@
  '(package-archives
    (quote
     (("gnu" . "https://elpa.gnu.org/packages/")
-     ("melpa-stable" . "https://stable.melpa.org/packages/"))))
- '(package-selected-packages (quote (markdown-mode)))
+     ("melpa-stable" . "https://stable.melpa.org/packages/")
+     ("melpa" . "http://melpa.org/packages/"))))
+ '(package-selected-packages
+   (quote
+    (groovy-mode clang-format vlf company-ycmd flycheck-ycmd ycmd modern-cpp-font-lock swiper ivy exec-path-from-shell markdown-mode)))
+ '(python-indent-guess-indent-offset nil)
  '(revert-without-query nil)
  '(safe-local-variable-values (quote ((backup-inhibited . t))))
  '(save-place t nil (saveplace))
@@ -65,6 +82,7 @@
  '(show-trailing-whitespace t)
  '(split-width-threshold nil)
  '(ssh-directory-tracking-mode t)
+ '(swiper-include-line-number-in-search t)
  '(tool-bar-mode nil)
  '(tramp-debug-buffer t)
  '(tramp-terminal-type "tramp" nil (tramp))
@@ -73,7 +91,11 @@
  '(vc-diff-switches "-u")
  '(visible-bell nil)
  '(warning-suppress-types (quote ((undo discard-info))))
- '(windmove-wrap-around t))
+ '(windmove-wrap-around t)
+ '(ycmd-global-config "/Users/jimix/.ycm_extra_conf.py")
+ '(ycmd-server-command
+   (quote
+    ("python" "/Users/jimix/.vim/bundle/YouCompleteMe/third_party/ycmd/ycmd"))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -84,5 +106,7 @@
  '(ebrowse-member-class ((t (:background "gold" :foreground "purple"))))
  '(ebrowse-root-class ((t (:background "gold" :foreground "blue1" :weight bold))))
  '(region ((((class color) (min-colors 88) (background dark)) (:background "grey40"))))
+ '(ruler-mode-pad ((t (:inherit ruler-mode-default :background "grey64" :foreground "white"))))
  '(trailing-whitespace ((t (:background "magenta"))))
+ '(vc-annotate-face-3F3FFF ((t (:foreground "light coral"))) t)
  '(which-func ((((class color) (min-colors 88) (background dark)) (:background "black" :foreground "yellow")))))
